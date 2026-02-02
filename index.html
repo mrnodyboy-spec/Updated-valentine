@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Will You Be My Valentine? 💖</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffd1dc, #ffe6f0);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+    .card {
+      background: #fff;
+      padding: 35px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      width: 320px;
+      position: relative;
+    }
+    h1 { color: #ff4d88; }
+    .btn {
+      padding: 12px 30px;
+      font-size: 16px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 10px;
+    }
+    .yes { background: #ff4d88; color: #fff; }
+    .no  { background: #ccc; color: #333; position: absolute; }
+  </style>
+</head>
+<body>
+
+  <!-- 🔊 NO button audio -->
+  <audio id="noAudio" src="no-sound.mp3"></audio>
+
+  <div class="card">
+    <h1>Will you be my Valentine? 💕</h1>
+    <button class="btn yes" onclick="yesClicked()">YES 💖</button>
+    <button class="btn no" id="noBtn">NO 🙃</button>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const noAudio = document.getElementById("noAudio");
+
+    noBtn.addEventListener("mouseover", runNo);
+    noBtn.addEventListener("click", runNo);
+
+    function runNo() {
+      // 🔊 sound on NO
+      noAudio.currentTime = 0;
+      noAudio.play().catch(()=>{});
+
+      // 📳 vibration
+      if (navigator.vibrate) navigator.vibrate(120);
+
+      // 🏃 NO button fast move
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 80);
+      noBtn.style.left = x + "px";
+      noBtn.style.top  = y + "px";
+    }
+
+    function yesClicked() {
+      if (navigator.vibrate) navigator.vibrate([200,100,200]);
+      window.location.href = "surprise.html";
+    }
+  </script>
+
+</body>
+</html>
